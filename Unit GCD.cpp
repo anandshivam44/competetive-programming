@@ -1,23 +1,9 @@
 #include <iostream>
-#include <algorithm>
-#include <bits/stdc++.h>
 using namespace std;
 #include <iostream>
-#include <sstream>
-#include <cstdio>
-#include <cmath>
-#include <cstring>
-#include <cctype>
-#include <string>
 #include <vector>
-#include <list>
-#include <set>
-#include <map>
-#include <queue>
-#include <stack>
-#include <algorithm>
-#include <functional>
-#define DEBUG(x) cout << '>' << #x << ':' << x << "\n";
+#include <sstream> // for string streams
+#include <string>
 #define REP(i, n) for (int i = 0; i < (n); i++)
 
 int gcd(int a, int b)
@@ -37,27 +23,69 @@ int main()
     {
         int n;
         cin >> n;
-        bool b[n];
+        bool status[n + 1] = {false}; // 0 th index left not considered
         int start_pointer = 2;
-
+        string str = "";
         int c = 0;
         vector<int> container;
-        container.push_back(2);
-        for (int i = 3; i <= n; i++)
+        container.push_back(1);
+        bool work_on_pointer = true;
+        while (work_on_pointer)
         {
-
-            for (int j = 0; j < container.size(); j++)
+            container.clear();
+            container.push_back(1);
+            for (int i = start_pointer; i <= n; i++)
             {
-                if (gcd(i, container[j]) == 1)
+                bool k = true;
+                for (int j = 0; j < container.size(); j++)
+                {
+                    if (!(gcd(i, container[j]) == 1))
+                    {
+                        k = false;
+                    }
+                }
+                if (k == true && status[i] == false)
                 {
                     container.push_back(i);
+                    status[i] = true;
+                }
+                //
+                for (int j = 2; j <= n; j++) //search for next start pointer
+                {
+                    if (status[j] == false)
+                    {
+                        start_pointer = j;
+                        break;
+                    }
+                }
+            }
+            str += to_string(container.size()) + " ";
+            for (int j = 0; j < container.size(); j++)
+            {
+                str += (to_string(container[j])) + " ";
+            }
+            str += "\n";
+            c++;
+
+            bool temp = true;
+            for (int j = start_pointer; j <= n; j++) //search for next start pointer
+            {
+                if (status[j] == false)
+                {
+                    start_pointer = j;
+                    work_on_pointer = true;
+                    break;
+                }
+                else
+                {
+                    work_on_pointer = false;
                 }
             }
         }
-        for (int j = 0; j < container.size(); j++)
-        {
-            cout<<container[j]<<" ";
-        }
+
+        //cout << "Final Answer\n";
+        cout << c << "\n"
+             << str;
     }
 
     return 0;
