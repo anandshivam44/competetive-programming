@@ -1,1 +1,5 @@
-sort(object, object+n, compare);
+for (int i = 0; i < n; i++)
+    // {
+    //     cout<< arr[i]<<" ";
+    //     // sum += arr[i];
+    // }

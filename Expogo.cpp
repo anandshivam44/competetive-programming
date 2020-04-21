@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm> // for lexicographical_compare()
-
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -12,7 +12,7 @@ struct Player
     int score;
     string name;
 };
-#include <bits/stdc++.h>
+
 class Checker
 {
 public:
@@ -27,34 +27,28 @@ public:
         char char_array_2[n2 + 1];
         strcpy(char_array_1, a.name.c_str());
         strcpy(char_array_2, b.name.c_str());
-        // if (a.score > b.score)
-        // {
-        //     if (lexicographical_compare(char_array_1, char_array_1 + n1, char_array_2, char_array_2 + n2))
-        //     {
-        //         return -1;
-        //     }
-        //     else
-        //     {
-        //         return 0;
-        //     }
-        //     return 0;
-        // }
-        // else
-        // {
-        //     if (lexicographical_compare(char_array_1, char_array_1 + n1, char_array_2, char_array_2 + n2))
-        //     {
-        //         return -1;
-        //     }
-        //     else
-        //     {
-        //         return 0;
-        //     }
-        //     return -1;
-        // }
-        if(a.score < b.score || (!(b.score < a.score) && !lexicographical_compare(char_array_1, char_array_1 + n1, char_array_2, char_array_2 + n2)))
-        return -1;
-        else
-        return 0;
+        if (lexicographical_compare(char_array_1, char_array_1 + n1, char_array_2, char_array_2 + n2))
+        {
+            if (a.score > b.score)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        else if (lexicographical_compare(char_array_1, char_array_1 + n1, char_array_2, char_array_2 + n2))
+        {
+            if (b.score > a.score)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
+        }
     }
 };
 

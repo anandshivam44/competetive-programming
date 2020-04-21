@@ -1,29 +1,20 @@
-import java.util.Scanner;
-import java.math.BigInteger;
-import java.util.Arrays;
+import java.time.*;
+import java.time.DayOfWeek;
 
-/**
- * code_1
- */
-public class code_1 {
-
+class code_1 {
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        int N=sc.nextInt();
-        long arr[]=new long[N];
-        for (int i = 0; i < N; i++) {
-            arr[i]=sc.nextLong();
-        }
-        Arrays.sort(arr);
-        BigInteger sum=new BigInteger("0");
-        BigInteger s=new BigInteger("0");
-        for (int i = N-2; i >= 0; i--) {
-            sum.add(BigInteger.valueOf(arr[i]));
-            s.add(sum);
-        }
-        System.out.println(s);
+        // Set a local date whose day is found
+        LocalDate localDate = LocalDate.of(2020, 04, 18);
 
-        sc.close();
-        
+        // Find the day from the local date
+        DayOfWeek dayOfWeek = DayOfWeek.from(localDate);
+
+        // Printing the day of the week
+        // and its Int value
+        System.out.println( dayOfWeek.name());
+
+        // int val = dayOfWeek.getValue();
+
+        // System.out.println("Int Value of " + dayOfWeek.name() + " - " + val);
     }
 }

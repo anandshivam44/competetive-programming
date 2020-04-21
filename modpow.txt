@@ -1,0 +1,7 @@
+ll modpow(ll x, ll n){
+	if(n == 0) return 1 % mod;
+	ll u = modpow(x, n /2);
+	u = (u * u) % mod;
+	if(n % 2) u = (u * x) % mod;
+	return u;
+}
