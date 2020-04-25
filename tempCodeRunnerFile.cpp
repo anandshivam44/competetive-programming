@@ -1,5 +1,8 @@
-for (int i = 0; i < n; i++)
-    // {
-    //     cout<< arr[i]<<" ";
-    //     // sum += arr[i];
-    // }
+for (int i = x; i <= y; i++)
+        // {
+        //     if (s[i] == max)
+        //     {
+        //         count++;
+        //     }
+        // }
+        // cout<<count<<endl;

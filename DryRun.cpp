@@ -5,15 +5,35 @@ ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
 const ll mod = 1000000007;
 const ll inf = 1e18;
 #define all(x) begin(x), end(x)
+#define loop(i, n) for (int i = 0; i < n; i++)
+#define print_array(arr)                               \
+	loop(z, sizeof(arr) / sizeof(arr[0])) cout << arr[z] << " "; \
+	cout << "\n"
+#define print_vector(vvv)                               \
+	loop(z, vvv.size()) cout << vvv[z] << " "; \
+	cout << "\n"
+#define print_vector_pair(vvv)                               \
+	loop(z, vvv.size()) cout << vvv[z].first << " "vvv[z].second<<"\n"; \
+	cout << "\n"
+#define fill_my(arr,q) fill(all(arr),q)
 
 void solve()
 {
-	int arr[] = {8, 6, 47, 9, 51, 2, 3, 6, 5, 47, 9, 5, 9, 6, 2, 1, 7, 8, 5, 6, 56, 5, 6, 6, 46, 4, 6, 46, 4, 64, 64, 9, 9, 9, 879};
-	sort(all(arr));
-	for (int i : arr)
+	int arr[] = {8, 6, 47, 9, 51, 2, 3, 6, 5, 47,33};
+	vector<pair<int,int>> v;
+	int w = sizeof(arr) / sizeof(arr[0]);
+	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
 	{
-		cout << arr[i] << " ";
+		v.emplace_back(arr[i],arr[i+1]);
 	}
+
+	//fill_my(arr,5);
+	//print_vector_pair(v);
+	for (int i = 0; i < w; i++)
+	{
+		cout<<v[i].first<<" "<<v[i].second<<"\n";
+	}
+	
 }
 
 int main()
