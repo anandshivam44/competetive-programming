@@ -24,7 +24,7 @@ void solve()
 
     for (int i = 0; i <= n; i++)
     {
-        }
+    }
     //cout <<a<<"\n";
 }
 
@@ -35,11 +35,38 @@ int main()
     cin.sync_with_stdio(false);
     cin.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--)
+    int n, wallet;
+    cin >> n >> wallet;
+    string s;
+    cin >> s;
+    int lp = 0;
+    int rp = n - 1;
+    char l = s[0], r = s[n - 1];
+    int rl = 0, rr = 0;
+    while (lp != rp)
     {
-        solve();
+        while (l == s[lp])
+        {
+            rl++;
+            lp++;
+        }
+
+        // if (l == s[lp])
+        // {
+        //     rl++;
+        //     lp++;
+        // }
+        // else if (l != s[lp])
+        // {
+        // }
+        // if (r == s[rp])
+        // {
+        //     rr++;
+        //     rp--;
+        // }
+        // else if (l != s[lp])
+        // {
+        // }
     }
 
     // time_req = clock() - time_req;

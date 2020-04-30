@@ -17,15 +17,31 @@ const ll inf = 1e18;
     cout << "\n"
 #define fill_my(arr, q) fill(all(arr), q)
 
+bool arr[20105];
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    //fill(arr,arr+20005,false);
+    ll n, k;
+    cin >> n >> k;
+    ll a[n];
+    ll count = 0;
 
-    for (int i = 0; i <= n; i++)
+    for (int i = 0; i < n; i++)
     {
+        ll aaa;
+        cin >> aaa;
+        arr[aaa] = true;
+        a[i] = aaa;
+    }
+    //sort(a,a+n);
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[a[i]] == true && arr[a[i] + k] == true && arr[a[i] + 2 * k] == true)
+        {
+            count++;
         }
-    //cout <<a<<"\n";
+    }
+    cout << count << endl;
 }
 
 int main()
@@ -34,13 +50,7 @@ int main()
     time_req = clock();
     cin.sync_with_stdio(false);
     cin.tie(0);
-
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+    solve();
 
     // time_req = clock() - time_req;
     // cout << "\nProcessor time " << (float)time_req / CLOCKS_PER_SEC<< " sec" << endl;

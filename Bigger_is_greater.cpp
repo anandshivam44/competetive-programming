@@ -19,12 +19,17 @@ const ll inf = 1e18;
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
-
-    for (int i = 0; i <= n; i++)
+    string s;
+    cin >> s;
+    if (next_permutation(s.begin(), s.end()))
     {
-        }
+        cout << s << endl;
+    }
+    else
+    {
+        cout << "no answer" << endl;
+    }
+
     //cout <<a<<"\n";
 }
 
