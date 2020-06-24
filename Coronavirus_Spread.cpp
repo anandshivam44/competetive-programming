@@ -19,13 +19,45 @@ const ll inf = 1e18;
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    int n;
+    cin >> n;
+    vector<int> v;
+    vector<int> vv;
 
     for (int i = 0; i < n; i++)
     {
+        int k;
+        cin >> k;
+        v.push_back(k);
     }
-    //cout <<a<<"\n";
+
+    // print_vector(v);
+    int mn = INT_MAX;
+    int mx = 0;
+    int temp = v[0];
+    int count = 0;
+    for (int i = 1; i < n; i++)
+    {
+        int k = v[i] - temp;
+        // cout << k << " <= 2 is " << (k <= 2) << endl;
+        if (k <= 2)
+        {
+
+            count++;
+            // cout << "count increased to " << count << endl;
+        }
+        else
+        {
+            mn = min(mn, count);
+            mx = max(mx, count);
+            count = 0;
+            // cout << "count set to zero" << endl;
+        }
+        temp = v[i];
+    }
+    mn = min(mn, count);
+    mx = max(mx, count);
+    cout << mn + 1 << " " << mx + 1 << endl;
 }
 
 int main()

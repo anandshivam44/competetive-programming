@@ -19,13 +19,24 @@ const ll inf = 1e18;
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    int p, d, m, s, count = 0;
+    cin >> p >> d >> m >> s;
 
-    for (int i = 0; i < n; i++)
+    while (s > 0)
     {
+        if (p < m)
+            p = m;
+        if (s - p >= 0)
+        {
+            s = s - p;
+            count++;
+        }
+        else
+            break;
+        p -= d;
     }
-    //cout <<a<<"\n";
+
+    cout << count << endl;
 }
 
 int main()
@@ -35,12 +46,13 @@ int main()
     cin.sync_with_stdio(false);
     cin.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+    // int t;
+    // cin >> t;
+    // while (t--)
+    // {
+    //     solve();
+    // }
+    solve();
 
     // time_req = clock() - time_req;
     // cout << "\nProcessor time " << (float)time_req / CLOCKS_PER_SEC<< " sec" << endl;

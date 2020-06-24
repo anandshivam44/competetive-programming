@@ -19,12 +19,27 @@ const ll inf = 1e18;
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    ll n, k;
+    cin >> n >> k;
+    int arr[n];
+    int sum = 0;
+    int sumWithLoss = 0;
 
     for (int i = 0; i < n; i++)
     {
+        cin >> arr[i];
+        sum += arr[i];
+        if (arr[i] > k)
+        {
+            sumWithLoss += k;
+        }
+        else
+        {
+            sumWithLoss += arr[i];
+        }
     }
+    cout<<sum-sumWithLoss<<endl;
+
     //cout <<a<<"\n";
 }
 

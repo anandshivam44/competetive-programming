@@ -19,13 +19,40 @@ const ll inf = 1e18;
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    ll n;
+    cin >> n;
+    ll count = 0;
 
-    for (int i = 0; i < n; i++)
+    if (log2(n) == (int)(log2(n)) || n == 1 || n==2)
     {
+        count = 0;
     }
-    //cout <<a<<"\n";
+    else if (n % 2 == 1)
+    {
+        count = n / 2;
+    }
+    else if (n % 2 == 0)
+    {
+        ll temp = n;
+        ll powS = 0;
+        while (temp % 2 == 0)
+        {
+            temp /= 2;
+            powS++;
+        }
+        ll t=pow(2, powS + 1);
+        if (t<n)
+        {
+            count=(ll)(n/t);
+        }
+        
+    }
+    cout << count << endl;
+
+    // for (int i = 0; i < n; i++)
+    // {
+    // }
+    // //cout <<a<<"\n";
 }
 
 int main()

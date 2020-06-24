@@ -19,12 +19,64 @@ const ll inf = 1e18;
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    ll n;
+    cin >> n;
+    int coins[3] = {0};
+    int arr[n];
+    arr[0]=0;
+    arr[1]=0;
+    arr[2]=0;
+    bool b = true;
 
     for (int i = 0; i < n; i++)
     {
+        cin >> arr[i];
     }
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == 5)
+        {
+            coins[0]++;
+        }
+        else if (arr[i] == 10)
+        {
+            if (coins[0] >= 1)
+            {
+                coins[1]++;
+                coins[0]--;
+            }
+            else
+            {
+                cout << "NO\n";
+                b = false;
+                break;
+            }
+        }
+        else if (arr[i] == 15)
+        {
+            if (coins[1] >= 1)
+            {
+                coins[2]++;
+                coins[1]--;
+            }
+            else if (coins[0] >= 2)
+            {
+                coins[2]++;
+                coins[0] -= 2;
+            }
+            else
+            {
+                cout << "NO\n";
+                b = false;
+                break;
+            }
+        }
+    }
+    if (b)
+    {
+        cout << "YES\n";
+    }
+
     //cout <<a<<"\n";
 }
 

@@ -19,12 +19,34 @@ const ll inf = 1e18;
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
-
-    for (int i = 0; i < n; i++)
+    ll n, q;
+    cin >> n >> q;
+    string s;
+    cin >> s;
+    int arr[26];
+    fill_my(arr, 0);
+    for (int i = 0; i < s.length(); i++)
     {
+        char cc = s[i];
+        arr[cc - 'a']++;
     }
+    // print_array(arr);
+    for (int i = 0; i < q; i++)
+    {
+        int c;
+        cin >> c;
+        int sum = 0;
+        for (int j = 0; j < 26; j++)
+        {
+            if (arr[j] > c)
+            {
+                sum += (arr[j] - c);
+            }
+        }
+
+        cout << sum << endl;
+    }
+
     //cout <<a<<"\n";
 }
 

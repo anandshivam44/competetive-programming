@@ -22,7 +22,7 @@ void solve()
     ll n, a;
     cin >> n >> a;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i <= n; i++)
     {
     }
     //cout <<a<<"\n";
@@ -35,12 +35,7 @@ int main()
     cin.sync_with_stdio(false);
     cin.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+    solve();
 
     // time_req = clock() - time_req;
     // cout << "\nProcessor time " << (float)time_req / CLOCKS_PER_SEC<< " sec" << endl;

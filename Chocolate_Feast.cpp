@@ -19,13 +19,28 @@ const ll inf = 1e18;
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    ll n, cost, m;
+    cin >> n >> cost >> m;
+    // cout << n << " " << cost << " " << m << endl;
 
-    for (int i = 0; i < n; i++)
+    int eat = n / cost;
+    int q = eat;
+    // cout << eat << " start" << endl;
+    while (q >= 0)
     {
+        int add=q/m;
+        eat+=add;
+        int reduce=q-q%m;
+        q=q+add-reduce;
+        // cout << "q = " << q << " - " << n2 << " = " << q - n2 << endl;
+
+        if (q < m)
+        {
+            break;
+        }
     }
-    //cout <<a<<"\n";
+
+    cout << eat  << endl;
 }
 
 int main()

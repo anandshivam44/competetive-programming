@@ -14,18 +14,46 @@ const ll inf = 1e18;
     cout << "\n"
 #define print_vector_pair(vvv)                                             \
     loop(z, vvv.size()) cout << vvv[z].first << " " vvv[z].second << "\n"; \
-    cout << "\n"
+    cout << "\n";
 #define fill_my(arr, q) fill(all(arr), q)
 
-void solve()
+void solve(int n)
 {
-    ll n, a;
-    cin >> n >> a;
+    unordered_map<int, int> map;
 
     for (int i = 0; i < n; i++)
     {
+        int num;
+        cin >> num;
+        map[num]++;
     }
-    //cout <<a<<"\n";
+
+    int length = map.size();
+    vector<pair<int, int>> v(length);
+
+    for (auto x : map){
+        v[length-1].first=x.first;
+        v[length-1].second=x.second;
+        length=length-1;
+    }
+    // print_vector_pair(v);
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout<<v[i].first<<" "<<v[i].second<<endl;
+    }
+    
+
+    // for (auto i = map.begin(); i < map.end(); i++)
+    // {
+    //     // auto x=map[i];
+    //     cout << map[i].first << " " << map[i] << endl;
+    // }
+
+// for (auto it = map.end(); it >= map.begin(); it++) { 
+//         cout << "(" << it->first << ", " 
+//              << it->second << ")" << endl; 
+//     } 
+
 }
 
 int main()
@@ -35,12 +63,9 @@ int main()
     cin.sync_with_stdio(false);
     cin.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+    int n;
+    cin >> n;
+    solve(n);
 
     // time_req = clock() - time_req;
     // cout << "\nProcessor time " << (float)time_req / CLOCKS_PER_SEC<< " sec" << endl;
