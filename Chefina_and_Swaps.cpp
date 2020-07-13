@@ -17,20 +17,53 @@ const ll inf = 1e18;
     cout << "\n"
 #define fill_my(arr, q) fill(all(arr), q)
 
+ll a[999999999];
+ll bbb[999999999];
+
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    // fill_my(a,0);
+    // fill_my(bbb,0);
+    // int n;
+    // cin >> n;
+    // ll t;
+    // vector<ll> aa;
+    // vector<ll> bb;
 
-    for (int i = 0; i < n; i++)
-    {
-    }
+    // for (int i = 0; i < n; i++)
+    // {
 
+    //     cin >> t;
+    //     a[t]++;
+    // }
 
-
-
-    
-    //cout <<a<<"\n";
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cin >> t;
+    //     bbb[t]++;
+    // }
+    // for (auto i = 0; i < 999999999; i++)
+    // {
+    //     if (a[i] != bbb[i])
+    //     {
+    //         if (a[i] > bbb[i])
+    //         {
+    //             for (int i = 1; i <= (a[i] - bbb[i]); i = i + 2)
+    //             {
+    //                 aa.push_back(i);
+    //             }
+    //         }
+    //         else
+    //         {
+    //             for (int i = 1; i <= (bbb[i] - a[i]); i = i + 2)
+    //             {
+    //                 bb.push_back(i);
+    //             }
+    //         }
+    //     }
+    // }
+    // print_vector(aa);
+    // print_vector(bb);
 }
 
 int main()

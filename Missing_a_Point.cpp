@@ -12,25 +12,47 @@ const ll inf = 1e18;
 #define print_vector(vvv)                      \
     loop(z, vvv.size()) cout << vvv[z] << " "; \
     cout << "\n"
-#define print_vector_pair(vvv)                                             \
-    loop(z, vvv.size()) cout << vvv[z].first << " " vvv[z].second << "\n"; \
-    cout << "\n"
+#define print_vector_pair(vvv)                                                \
+    loop(z, vvv.size()) cout << vvv[z].first << " " << vvv[z].second << "\n"; \
+    cout << "\n";
 #define fill_my(arr, q) fill(all(arr), q)
 
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    ll n;
+    cin >> n;
+    int arr[2][4 * n - 1];
+    int res_x, res_y;
+    map<int, int> umap_x;
+    map<int, int> umap_y;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < 4 * n - 1; i++)
     {
+        cin >> arr[0][i];
+        cin >> arr[1][i];
+        umap_x[arr[0][i]]++;
+        umap_y[arr[1][i]]++;
     }
+    for (auto x : umap_x)
+    {
+        // cout << x.first << " " << x.second << endl;
+        if (x.second % 2 == 1)
+        {
+            res_x = x.first;
+        }
+    }
+    // cout << endl;
+    for (auto x : umap_y)
+    {
+        // cout << x.first << " " << x.second << endl;
+        if (x.second % 2 == 1)
+        {
+            res_y = x.first;
+        }
+    }
+    // cout << endl;
 
-
-
-
-    
-    //cout <<a<<"\n";
+    cout<<res_x<<" "<<res_y<<endl;
 }
 
 int main()
