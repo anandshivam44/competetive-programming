@@ -24,12 +24,12 @@ int main()
             if (visited[pointer])
                 continue;
             visited[pointer] = 1;
-            vector<int> self({pointer});
-            while (arr[self.back()] != pointer)
+            vector<int> queue({pointer});
+            while (arr[queue.back()] != pointer)
             {
-                self.push_back(arr[self.back()]);
-                dis[self.back()] = dis[pointer];
-                visited[self.back()] = 1;
+                queue.push_back(arr[queue.back()]);
+                dis[queue.back()] = dis[pointer];
+                visited[queue.back()] = 1;
             }
             auto add = [&](int j) {
                 if (dis[j] <= dis[pointer] + 1)
@@ -37,7 +37,7 @@ int main()
                 dis[j] = dis[pointer] + 1;
                 q.push(j);
             };
-            for (auto i : self)
+            for (auto i : queue)
             {
                 if (i)
                     add(i - 1);
