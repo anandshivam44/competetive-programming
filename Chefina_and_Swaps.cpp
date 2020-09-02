@@ -17,53 +17,70 @@ const ll inf = 1e18;
     cout << "\n"
 #define fill_my(arr, q) fill(all(arr), q)
 
-ll a[999999999];
-ll bbb[999999999];
-
 void solve()
 {
-    // fill_my(a,0);
-    // fill_my(bbb,0);
-    // int n;
-    // cin >> n;
-    // ll t;
-    // vector<ll> aa;
-    // vector<ll> bb;
+    ll n;
+    cin >> n;
+    map<ll, ll> map;
+    vector<ll> A;
+    vector<ll> B;
 
-    // for (int i = 0; i < n; i++)
-    // {
+    ll temp;
 
-    //     cin >> t;
-    //     a[t]++;
-    // }
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> temp;
+        map[temp]++;
+    }
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> temp;
+        map[temp]--;
+    }
+    ll mini = temp;
+    bool flag = false;
+    for (auto x : map)
+    {
+        mini = min(mini, x.first);
+        temp = abs(x.second);
 
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cin >> t;
-    //     bbb[t]++;
-    // }
-    // for (auto i = 0; i < 999999999; i++)
-    // {
-    //     if (a[i] != bbb[i])
-    //     {
-    //         if (a[i] > bbb[i])
-    //         {
-    //             for (int i = 1; i <= (a[i] - bbb[i]); i = i + 2)
-    //             {
-    //                 aa.push_back(i);
-    //             }
-    //         }
-    //         else
-    //         {
-    //             for (int i = 1; i <= (bbb[i] - a[i]); i = i + 2)
-    //             {
-    //                 bb.push_back(i);
-    //             }
-    //         }
-    //     }
-    // }
-    // print_vector(aa);
-    // print_vector(bb);
+        if (temp % 2 == 1)
+        {
+            flag = true;
+            break;
+        }
+        temp = x.second;
+        if (temp > 0)
+        {
+            temp /= 2;
+            while (temp--)
+            {
+                A.push_back(x.first);
+            }
+        }
+        else if (temp < 0)
+        {
+            temp = abs(temp) / 2;
+            while (temp--)
+            {
+                B.push_back(x.first);
+            }
+        }
+    }
+    if (flag)
+    {
+        cout << -1 << endl;
+    }
+    else
+    {
+        reverse(B.begin(), B.end());
+        ll answer = 0;
+        for (ll i = 0; i < A.size(); i++)
+        {
+            answer += min(2 * mini, min(A[i], B[i]));
+        }
+        cout << answer << "\n";
+    }
 }
 
 int main()

@@ -1,87 +1,113 @@
-#include <cmath>
-#include <cstdio>
-#include <vector>
 #include <iostream>
-#include <algorithm> // for lexicographical_compare()
-
-
+#include <vector>
+#include <queue>
 using namespace std;
 
-struct Player
-{
-    int score;
-    string name;
-};
-#include <bits/stdc++.h>
-class Checker
-{
-public:
-    // complete this method
-    static int comparator(Player a, Player b) //tells us whether the passed “first” argument should be placed before the passed “second” argument or not.
-    {
-        string k = a.name;
-        int n1 = a.name.length();
-        char char_array_1[n1 + 1];
+int main() {
+	int m;		// number of rows
+	int n;		// number of columns
+	int r;		// number of rotations total
+	int q;		// number of rotations for layer
+	int startm, startn;		// starting position
 
-        int n2 = b.name.length();
-        char char_array_2[n2 + 1];
-        strcpy(char_array_1, a.name.c_str());
-        strcpy(char_array_2, b.name.c_str());
-        // if (a.score > b.score)
-        // {
-        //     if (lexicographical_compare(char_array_1, char_array_1 + n1, char_array_2, char_array_2 + n2))
-        //     {
-        //         return -1;
-        //     }
-        //     else
-        //     {
-        //         return 0;
-        //     }
-        //     return 0;
-        // }
-        // else
-        // {
-        //     if (lexicographical_compare(char_array_1, char_array_1 + n1, char_array_2, char_array_2 + n2))
-        //     {
-        //         return -1;
-        //     }
-        //     else
-        //     {
-        //         return 0;
-        //     }
-        //     return -1;
-        // }
-        if(a.score < b.score || (!(b.score < a.score) && !lexicographical_compare(char_array_1, char_array_1 + n1, char_array_2, char_array_2 + n2)))
-        return -1;
-        else
-        return 0;
-    }
-};
+	cin >> m >> n >> r;
 
-bool compare(Player a, Player b)
-{
-    if (Checker::comparator(a, b) == -1)
-        return false;
-    return true;
-}
-int main()
-{
-    int n;
-    cin >> n;
-    vector<Player> players;
-    string name;
-    int score;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> name >> score;
-        Player player;
-        player.name = name, player.score = score;
-        players.push_back(player);
-    }
-    sort(players.begin(), players.end(), compare);
-    for (int i = 0; i < players.size(); i++)
-    {
-        cout << players[i].name << " " << players[i].score << endl;
-    }
-    return 0;
+	vector< vector<int> > input(m, vector<int>(n));
+
+	// Fill the input matrix
+	for(int i=0; i<m; ++i) {
+		for(int j=0; j<n; ++j) {
+			cin >> input[i][j];
+		}
+	}
+
+	// Calculate the answer
+	int t = ((m < n)?m:n)/2;
+	for(int x=0; x<t; ++x) {
+		queue<int> numbers;
+
+		// add top layer
+		for(int i=x; i<n-x; ++i) {
+			numbers.push(input[x][i]);
+		}
+		// add right layer
+		if(m-x-x > 2) {
+			for(int i=x+1; i<m-x-1; ++i) {
+				numbers.push(input[i][n-x-1]);
+			}
+		}
+		// add bot layer
+		for(int i=n-x-1; i>=x; --i) {
+			numbers.push(input[m-x-1][i]);
+		}
+		// add left layer
+		if(m-x-x > 2) {
+			for(int i=m-x-1-1; i>x; --i) {
+				numbers.push(input[i][x]);
+			}
+		}
+
+		// find the start position
+		int mm = m - x - x;
+		int nn = n - x - x;
+		q = (mm*nn)-((mm-2)*(nn-2));
+		q = r % q;
+		if(q == 0) {
+			startm = x;
+			startn = x;
+		} else if(q < mm) {
+			startm = q + x;
+			startn = x;
+		} else if(q < mm+nn-1) {
+			startm = mm - 1 + x;
+			startn = q - nn + x;
+		} else if(q < mm+nn+nn-2) {
+			startm = abs(q - nn - mm - 1 + x);
+			startn = nn - 1 + x;
+		} else {
+			startm = x;
+			startn = abs(q - nn - mm - nn + x);
+		}
+
+		// re-order the queue
+		while(q--) {
+			numbers.push(numbers.front());
+			numbers.pop();
+		}
+
+		// add top layer
+		for(int i=x; i<n-x; ++i) {
+			input[x][i] = numbers.front();
+			numbers.pop();
+		}
+		// add right layer
+		if(m-x-x > 2) {
+			for(int i=x+1; i<m-x-1; ++i) {
+				input[i][n-x-1] = numbers.front();
+				numbers.pop();
+			}
+		}
+		// add bot layer
+		for(int i=n-x-1; i>=x; --i) {
+			input[m-x-1][i] = numbers.front();
+			numbers.pop();
+		}
+		// add left layer
+		if(m-x-x > 2) {
+			for(int i=m-x-1-1; i>x; --i) {
+				input[i][x] = numbers.front();
+				numbers.pop();
+			}
+		}
+	}
+
+	// Output the answer
+	for(int i=0; i<m; ++i) {
+		for(int j=0; j<n; ++j) {
+			cout << input[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	return 0;
 }

@@ -8,7 +8,7 @@ public class hashcode {
 
     
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
+        
         int no_of_books=sc.nextInt();
         int no_of_libraries=sc.nextInt();
         int no_of_days=sc.nextInt();

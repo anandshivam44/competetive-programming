@@ -50,12 +50,12 @@ void bin(unsigned long long int n)
     //printf("%d", n & 1);
     cout << (n & 1);
 }
-unsigned long long int decimalToBinary(unsigned long long int N)
+int decimalToBinary(int N)
 {
 
     // To store the binary number
-    ull B_Number = 0;
-    unsigned long long int cnt = 0;
+    int B_Number = 0;
+    int cnt = 0;
     while (N != 0)
     {
         unsigned long long int rem = N % 2;
