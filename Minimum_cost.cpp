@@ -15,29 +15,29 @@ int main()
             cin >> arr[i], arr[i]--;
         fill(dis + 1, dis + n, n);
         memset(visited, 0, sizeof visited);
-        queue<int> q({0});
-        while (q.size())
+        queue<int> que({0});
+        while (que.size())
         {
-            int pointer = q.front();
+            int pointer = que.front();
             cout << pointer << " _ " << endl;
-            q.pop();
+            que.pop();
             if (visited[pointer])
                 continue;
             visited[pointer] = 1;
-            vector<int> queue({pointer});
-            while (arr[queue.back()] != pointer)
+            vector<int> self({pointer});
+            while (arr[self.back()] != pointer)
             {
-                queue.push_back(arr[queue.back()]);
-                dis[queue.back()] = dis[pointer];
-                visited[queue.back()] = 1;
+                self.push_back(arr[self.back()]);
+                dis[self.back()] = dis[pointer];
+                visited[self.back()] = 1;
             }
             auto add = [&](int j) {
                 if (dis[j] <= dis[pointer] + 1)
                     return;
                 dis[j] = dis[pointer] + 1;
-                q.push(j);
+                que.push(j);
             };
-            for (auto i : queue)
+            for (auto i : self)
             {
                 if (i)
                     add(i - 1);

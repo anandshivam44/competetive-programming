@@ -2,10 +2,10 @@
 using namespace std;
 int v = 6;
 
-void addEdge(vector<int> adj[], int source, int destination)
+void addEdge(vector<int> adj[], int node1, int node2)
 {
-    adj[source].push_back(destination);
-    adj[destination].push_back(source);
+    adj[node1].push_back(node2);
+    adj[node2].push_back(node1);
 }
 
 void BFS(vector<int> adj[], int source, int predecessor[], int distance[])
