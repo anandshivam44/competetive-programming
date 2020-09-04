@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-void dfs(vector<int> adj[], int s, bool visited[])
+void dfs(vector<int> adj[], int s, bool visited[],int distance)
 {
     visited[s] = true;
 
@@ -10,7 +10,7 @@ void dfs(vector<int> adj[], int s, bool visited[])
     {
         if (visited[adj[s][i]] == false)
         {
-            dfs(adj, adj[s][i], visited);
+            dfs(adj, adj[s][i], visited,distance+1);
             cout << adj[s][i] << " ";
         }
     }

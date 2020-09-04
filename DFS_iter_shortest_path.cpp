@@ -9,7 +9,7 @@ void addEdge(vector<int> adj[], int node1, int node2)
     adj[node2].push_back(node1);
 }
 
-void dfs_iterative(vector<int> adj[], int source, int visited[])
+void dfs_iterative(vector<int> adj[], int source, int destination, int visited[])
 {
 
     stack<int> stack;
@@ -44,7 +44,7 @@ int main()
 {
     int nodes, edges, x, y, noOfDistinctGraphs = 0;
     nodes = 15; //Number of nodes
-    edges = 13; //Number of edges
+    edges = 14; //Number of edges
     vector<int> adj[nodes + 1];
     int visited[nodes + 1];
 
@@ -60,25 +60,15 @@ int main()
     addEdge(adj, 5, 11);
     addEdge(adj, 6, 12);
     addEdge(adj, 6, 13);
-    addEdge(adj, 15, 14);
-    // addEdge(adj, 7, 15);
+    addEdge(adj, 7, 14);
+    addEdge(adj, 7, 15);
 
     for (int i = 0; i < 20; ++i)
         visited[i] = notVisited;
 
-    int source = 1;
-    cout << "DFS traversal in order ";
-    int noOfGraphs = 0;
-    for (int i = 1; i <= nodes; i++)
-    {
-        if (visited[i] == notVisited)
-        {
-            noOfGraphs++;
-            dfs_iterative(adj, i, visited);
-        }
-    }
-    cout << endl
-         << "No of Graphs = " << noOfGraphs << endl;
+    int source = 1, destination = 10;
+    dfs_iterative(adj, source, destination, visited);
+
 
     return 0;
 }
