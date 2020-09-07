@@ -30,31 +30,34 @@ void solve()
     // delete_by_value(vec2, 10);
     // print_vector(vec);
     // print_vector(vec2);
+    int a = 4;
+    a <<= 1;
+    cout << (((ll)1) << 56) << endl;
 
-    vector<int> v;
-    int ss = 0;
-    v.push_back(1);
-    v.push_back(4);
-    v.push_back(5);
-    // v.push_back(2);
-    // v.push_back(2);
-    int ans = v[0];
-    for (int i = 1; i < v.size(); i++)
-    {
-        ans = ans ^ v[i];
-        // cout << "i : " << ans << endl;
-        cout << ans << " ";
-        ss += v[i];
-    }
-    cout << endl
-         << endl;
-    ans = 0;
-    for (int i = 1; i <= ss; i++)
-    {
-        ans = ans ^ i;
-        // cout << "i : " << ans << endl;
-        cout << ans << " ";
-    }
+    // vector<int> v;
+    // int ss = 0;
+    // v.push_back(1);
+    // v.push_back(1);
+    // // v.push_back(5);
+    // // v.push_back(2);
+    // // v.push_back(2);
+    // int ans = v[0];
+    // for (int i = 1; i < v.size(); i++)
+    // {
+    //     ans = ans ^ v[i];
+    //     // cout << "i : " << ans << endl;
+    //     cout << ans << " ";
+    //     ss += v[i];
+    // }
+    // cout << endl
+    //      << endl;
+    // ans = 0;
+    // for (int i = 1; i <= ss; i++)
+    // {
+    //     ans = ans ^ i;
+    //     // cout << "i : " << ans << endl;
+    //     cout << ans << " ";
+    // }
 }
 
 int main()

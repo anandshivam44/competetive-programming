@@ -161,20 +161,20 @@ void playGame(int piles[], int n, int whoseTurn)
 } 
 
 void knowWinnerBeforePlaying(int piles[], int n, 
-							int whoseTurn) 
+							int whoseTurnFirst) 
 { 
 	cout <<"Prediction before playing the game -> "; 
 
 	if (calculateNimSum(piles, n) !=0) 
 	{ 
-		if (whoseTurn == COMPUTER) 
+		if (whoseTurnFirst == COMPUTER) 
 			cout <<"COMPUTER will win\n"; 
 		else
 			cout <<"HUMAN will win\n"; 
 	} 
 	else
 	{ 
-		if (whoseTurn == COMPUTER) 
+		if (whoseTurnFirst == COMPUTER) 
 			cout <<"HUMAN will win\n"; 
 		else
 			cout <<"COMPUTER will win\n"; 
