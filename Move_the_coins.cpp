@@ -1,6 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
-int v = 6;
+typedef long long ll;
+ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
+const ll mod = 1000000007;
+const ll inf = 1e18;
+#define FIO                           \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(0);                       \
+    cout.tie(0);
+#define all(x) begin(x), end(x)
+#define loop(i, n) for (int i = 0; i < n; i++)
+#define print_array(arr)                                         \
+    loop(z, sizeof(arr) / sizeof(arr[0])) cout << arr[z] << " "; \
+    cout << "\n"
+#define print_vector(vvv)                      \
+    loop(z, vvv.size()) cout << vvv[z] << " "; \
+    cout << "\n"
+#define print_vector_pair(vvv)                                             \
+    loop(z, vvv.size()) cout << vvv[z].first << " " vvv[z].second << "\n"; \
+    cout << "\n"
+    #define pb(x) push_back(x)
+#define fill_my(arr, q) fill(all(arr), q)
+#define delete_by_value(vec, val) vec.erase(std::remove(vec.begin(), vec.end(), val), vec.end());
+#define READ(f) freopen(f, "r", stdin)
+#define WRITE(f) freopen(f, "w", stdout)
+#define mem(x,y) memset(x,y,sizeof(x));
+int V = 6;
+
+void deleteEdge(vector<int> adj[], int node1, int node2)
+{
+    delete_by_value(adj[node1], node2);
+    delete_by_value(adj[node2], node1);
+}
 
 void addEdge(vector<int> adj[], int node1, int node2)
 {
@@ -8,15 +39,29 @@ void addEdge(vector<int> adj[], int node1, int node2)
     adj[node2].push_back(node1);
 }
 
-void BFS(vector<int> adj[], int source, int predecessor[], int distance[])
+void BFS(vector<int> permanentTree[], int u, int v)
 {
-    list<int> queue;
-    int visited[v];
-    memset(visited, 0, sizeof visited);
-    // memset(predecessor, -1, sizeof predecessor);
-    // fill(distance, distance + v, INT_MAX);
+    // vector<int> adj[V + 1];
+    // for (int i = 0; i <= v; i++)//copy vector
+    // {
+    //     for (int j = 0; j < permanentTree[i].size(); j++)
+    //     {
+    //         adj[i].push_back(permanentTree[i][j]);
+    //     }
+    // }
+    // deleteEdge(permanentTree,u,v);//delete edge as said by alice
 
-    // int p = source;
+    list<int> queue;
+    int visited[V + 1];
+    memset(visited, 0, sizeof visited);
+
+    int predecessor[V + 1], distance[V + 1];
+    int childOf[V + 1];
+    memset(predecessor, -1, sizeof predecessor);
+    memset(childOf, -1, sizeof childOf);
+    fill(distance, distance + V, INT_MAX);
+
+    int source = 1;
     predecessor[source] = INT_MIN;
     distance[source] = 0;
     queue.push_back(source);
@@ -26,141 +71,98 @@ void BFS(vector<int> adj[], int source, int predecessor[], int distance[])
     {
 
         int p = queue.front();
-        cout << p << " ";
+        cout << p << endl;
         queue.pop_front();
 
-        for (int i = 0; i < adj[p].size(); i++)
+        for (int i = 0; i < permanentTree[p].size(); i++)
         {
-            if (visited[adj[p][i]] == false)
+            if (visited[permanentTree[p][i]] == false)
             {
-                queue.push_back(adj[p][i]);
-                visited[adj[p][i]] = true;
-                predecessor[adj[p][i]] = p;
-                distance[adj[p][i]] = distance[p] + 1;
+                queue.push_back(permanentTree[p][i]);
+                visited[permanentTree[p][i]] = true;
+                predecessor[permanentTree[p][i]] = p;
+                distance[permanentTree[p][i]] = distance[p] + 1;
+                childOf[p] = permanentTree[p][i];
             }
         }
     }
-}
-
-void shortestPath(vector<int> adj[], int source, int destination, int predecessor[], int successor[])
-{
-    vector<int> path_in_reverse;
-    int p = destination;
-    path_in_reverse.push_back(destination);
-    while (predecessor[p] != -1)
+    for (int i = 0; i < V + 1; i++)
     {
-        if (p == source)
+        cout << " predecessor of " << i << " is " << predecessor[i] << endl;
+    }
+    for (int i = 0; i < V + 1; i++)
+    {
+        cout << " distance " << i << " from source is " << distance[i] << endl;
+    }
+    for (int i = 0; i < V + 1; i++)
+    {
+        cout << " child of  " << i << "  is " << childOf[i] << endl;
+    }
+    cout << endl;
+
+    deleteEdge(permanentTree, u, predecessor[u]);
+    addEdge(permanentTree, u, v);
+    for (int i = 0; i < V + 1; i++)
+    {
+        cout << i << " : ";
+        for (int j = 0; j < permanentTree[i].size(); j++)
         {
-            break;
+            cout << permanentTree[i][j] << " ";
         }
+        cout << endl;
+    }
 
-        path_in_reverse.push_back(predecessor[p]);
-        p = predecessor[p];
-    }
-    for (int i = path_in_reverse.size() - 1; i >= 0; i--)
+    cout << endl;
+
+    for (int i = 0; i < V + 1; i++)
     {
-        cout << path_in_reverse[i] << " ";
+        cout << " predecessor of " << i << " is " << predecessor[i] << endl;
     }
+    for (int i = 0; i < V + 1; i++)
+    {
+        cout << " distance " << i << " from source is " << distance[i] << endl;
+    }
+    cout << endl;
 }
 
 void solve()
 {
-    vector<int> adj[v];
-    addEdge(adj, 0, 1);
-    addEdge(adj, 1, 2);
-    addEdge(adj, 2, 3);
-    addEdge(adj, 3, 4);
-    addEdge(adj, 4, 5);
-    addEdge(adj, 5, 0);
-    int source = 0, dest = 3;
-    // for (int i = 0; i < v; i++)
-    // {
-    //     cout << i << " : ";
-    //     for (int j = 0; j < adj[i].size(); j++)
-    //     {
-    //         cout << adj[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
-    int predecessor[v], distance[v];
-    memset(predecessor, -1, sizeof predecessor);
-    fill(distance, distance + v, INT_MAX);
-
-    BFS(adj, 0, predecessor, distance);
-
-    for (int i = 0; i < v; i++)
+    int n;
+    cin >> n;
+    V = n;
+    int noOfCoins[n + 1];
+    vector<int> adj[n + 1];
+    for (int i = 1; i <= n; i++)
     {
-        cout << "Predecessor of " << i << " is " << predecessor[i] << endl;
+        cin >> noOfCoins[i];
     }
-    for (int i = 0; i < v; i++)
+    for (int i = 1; i <= n - 1; i++)
     {
-        cout << "Distance from Source  " << i << " is " << distance[i] << endl;
+        int a, b;
+        cin >> a >> b;
+        addEdge(adj, a, b);
     }
-    cout << "Shortest path from " << source << " to " << dest << " is ";
-    shortestPath(adj, source, dest, predecessor, distance);
-    cout << endl
-         << "Distance = " << (abs(distance[source] - distance[dest]));
+    for (int i = 0; i < n + 1; i++)
+    {
+        cout << i << " : ";
+        for (int j = 0; j < adj[i].size(); j++)
+        {
+            cout << adj[i][j] << " ";
+        }
+        cout << endl;
+    }
 
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     if (BFS(adj, 0, i))
-    //     {
-    //         cout << i << " Found" << endl;
-    //     }
-    //     else
-    //     {
-    //         cout << i << " Not Found" << endl;
-    //     }
-    // }
-    // bool found = false;
+    cout << endl;
 
-    // list<int> queue;
-    // int visited[v];
-    // for (int i = 0; i < v; i++)
-    // {
-    //     visited[i] = false;
-    // }
-
-    // int p = source;
-    // queue.push_back(p);
-    // visited[p] = true;
-
-    // while (queue.size() != 0)
-    // {
-
-    //     p = queue.front();
-    //     cout << p << " ";
-    //     queue.pop_front();
-    //     for (int i = 0; i < adj[p].size(); i++)
-    //     {
-    //         if (visited[adj[p][i]] == false)
-    //         {
-    //             queue.push_back(adj[p][i]);
-    //             visited[adj[p][i]] = true;
-    //             if (adj[p][i] == dest)
-    //             {
-    //                 found = true;
-    //                 break;
-    //             }
-    //         }
-    //         if (found == true)
-    //         {
-    //             break;
-    //         }
-    //     }
-    //     if (found == true)
-    //     {
-    //         break;
-    //     }
-    // }
-    // if (found == true)
-    // {
-    //     cout << dest << " Found" << endl;
-    // }
-    // else
-    // {
-    //     cout << dest << " Not Found" << endl;
-    // }
+    int queries;
+    cin >> queries;
+    BFS(adj, 6, 2);
+    for (int i = 1; i <= queries; i++)
+    {
+        int u, v;
+        cin >> u, v;
+        // BFS(adj, u, v);
+    }
 }
 
 int main()
@@ -168,35 +170,3 @@ int main()
     solve();
     return 0;
 }
-
-// CPP code for printing shortest path between
-// two vertices of unweighted graph
-// #include <bits/stdc++.h>
-// using namespace std;
-
-// // utility function to form edge between two vertices
-// // source and dest
-// void add_edge(vector<int> adj[], int src, int dest)
-// {
-// 	adj[src].push_back(dest);
-// 	adj[dest].push_back(src);
-// }
-
-// // Driver program to test above functions
-// int main()
-// {
-// 	int v = 8;
-// 	vector<int> adj[v];
-// 	add_edge(adj, 0, 1);
-// 	add_edge(adj, 0, 3);
-// 	add_edge(adj, 1, 2);
-// 	add_edge(adj, 3, 4);
-// 	add_edge(adj, 3, 7);
-// 	add_edge(adj, 4, 5);
-// 	add_edge(adj, 4, 6);
-// 	add_edge(adj, 4, 7);
-// 	add_edge(adj, 5, 6);
-// 	add_edge(adj, 6, 7);
-// 	int source = 0, dest = 7;
-// 	return 0;
-// }

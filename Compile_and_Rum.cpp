@@ -22,31 +22,53 @@ const ll inf = 1e18;
 #define fill_my(arr, q) fill(all(arr), q)
 #define delete_by_value(vec, val) vec.erase(std::remove(vec.begin(), vec.end(), val), vec.end());
 
-
 void solve()
 {
-    ll n, a;
-    cin >> n >> a;
+    // vector<int> vec({9, 8, 7, 6, 5, 4, 3, 2, 1});
+    // vector<int> vec2;
+    // vec2 = vec;
+    // delete_by_value(vec2, 10);
+    // print_vector(vec);
+    // print_vector(vec2);
 
-    for (int i = 0; i < n; i++)
+    vector<int> v;
+    int ss = 0;
+    v.push_back(1);
+    v.push_back(4);
+    v.push_back(5);
+    // v.push_back(2);
+    // v.push_back(2);
+    int ans = v[0];
+    for (int i = 1; i < v.size(); i++)
     {
+        ans = ans ^ v[i];
+        // cout << "i : " << ans << endl;
+        cout << ans << " ";
+        ss += v[i];
     }
-
-    //cout <<a<<"\n";
+    cout << endl
+         << endl;
+    ans = 0;
+    for (int i = 1; i <= ss; i++)
+    {
+        ans = ans ^ i;
+        // cout << "i : " << ans << endl;
+        cout << ans << " ";
+    }
 }
 
 int main()
 {
     // clock_t time_req;
     // time_req = clock();
-    FIO;
+    // FIO;
 
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+    // int t;
+    // cin >> t;
+    // while (t--)
+    // {
+    solve();
+    // }
 
     // time_req = clock() - time_req;
     // cout << "\nProcessor time " << (float)time_req / CLOCKS_PER_SEC<< " sec" << endl;
