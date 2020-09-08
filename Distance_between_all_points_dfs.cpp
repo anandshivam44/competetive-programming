@@ -128,7 +128,7 @@ int main()
     }
     cout << "Hello" << endl;
 
-    dfs(graph, 1, -1, 0, 0, level, commonParent, dist);
+    dfs(graph, 1, -1, 0, 1, level, commonParent, dist);
 
     findDistance(1, 3, level, commonParent, dist);
 

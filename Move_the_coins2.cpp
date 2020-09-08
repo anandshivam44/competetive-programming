@@ -8,35 +8,13 @@ const ll inf = 1e18;
     ios_base::sync_with_stdio(false); \
     cin.tie(0);                       \
     cout.tie(0);
-#define all(x) begin(x), end(x)
-#define loop(i, n) for (int i = 0; i < n; i++)
-#define print_array(arr)                                         \
-    loop(z, sizeof(arr) / sizeof(arr[0])) cout << arr[z] << " "; \
-    cout << "\n"
-#define print_vector(vvv)                      \
-    loop(z, vvv.size()) cout << vvv[z] << " "; \
-    cout << "\n"
-#define print_vector_pair(vvv)                                             \
-    loop(z, vvv.size()) cout << vvv[z].first << " " vvv[z].second << "\n"; \
-    cout << "\n"
-#define fill_my(arr, q) fill(all(arr), q)
-#define delete_by_value(vec, val) vec.erase(std::remove(vec.begin(), vec.end(), val), vec.end());
 
-void addEdge(vector<int> adj[], int node1, int node2)
-{
-    adj[node1].push_back(node2);
-    adj[node2].push_back(node1);
-}
+const int MAX = 1002;
 
-ll power(ll x, ll y)
-{
-    if (y == 0)
-        return 1;
-    else if (y % 2 == 0)
-        return power(x, y / 2) * power(x, y / 2);
-    else
-        return x * power(x, y / 2) * power(x, y / 2);
-}
+// int logg = 10; // logg2(MAX
+vector<int> tree[MAX];
+int maxHeight = MAX;
+int level[MAX], LCA[MAX][MAX];
 
 int calculateNimSum(vector<int> piles)
 {
@@ -47,108 +25,132 @@ int calculateNimSum(vector<int> piles)
     return (nimsum);
 }
 
-// int BFS(vector<int> adj[], int source, int v, int coins[])
-// {
-//     // int predecessor[v+1];
-//     int distance[v + 1];
-//     // memset(predecessor, -1, sizeof predecessor);
-//     fill(distance, distance + v + 1, INT_MAX);
+void dfs(int node, int lvl, int par)
+{
+    level[node] = lvl;
+    LCA[node][0] = par;
 
-//     list<int> queue;
-//     int visited[v + 1];
-//     memset(visited, 0, sizeof visited);
+    for (int child : tree[node])
+        if (child != par)
+        {
+            dfs(child, lvl + 1, node);
+        }
+}
 
-//     // predecessor[source] = INT_MIN;
-//     distance[source] = 0;
-//     queue.push_back(source);
-//     visited[source] = true;
+void init(int n)
+{
+    dfs(1, 0, -1);
 
-//     while (queue.size() != 0)
-//     {
+    for (int i = 1; i <= maxHeight; i++)
+    {
+        for (int j = 1; j <= n; j++)
+            if (LCA[j][i - 1] != -1)
+            {
+                int par = LCA[j][i - 1];
+                LCA[j][i] = LCA[par][i - 1];
+            }
+    }
+}
 
-//         int p = queue.front();
-//         // cout << p << " ";
-//         queue.pop_front();
+int getLCA(int a, int b)
+{
+    if (level[b] < level[a])
+        swap(a, b);
 
-//         for (int i = 0; i < adj[p].size(); i++)
-//         {
-//             if (visited[adj[p][i]] == false)
-//             {
-//                 queue.push_back(adj[p][i]);
-//                 visited[adj[p][i]] = true;
-//                 // predecessor[adj[p][i]] = p;
-//                 distance[adj[p][i]] = distance[p] + 1;
-//             }
-//         }
-//     }
-//     // print_array(distance);
-//     // print_array(predecessor);
+    int d = level[b] - level[a];
 
-//     // for (int i = 0; i <= v; i++)
-//     // {
-//     //     cout << "Predecessor of " << i << " is " << predecessor[i] << endl;
-//     // }
-//     vector<int> gg;
-//     for (int i = 1; i <= v; i++)
-//     {
-//         // cout << "Distance from Source  " << i << " is " << distance[i] << endl;
-//         if (coins[i] % 2 == 1 && i != source)
-//         {
-//             gg.push_back(distance[i]);
-//         }
-//     }
+    while (d > 0)
+    {
+        int i = log2(d);
+        b = LCA[b][i];
 
-//     return calculateNimSum(gg);
-// }
+        d -= 1 << i;
+    }
+
+    if (a == b)
+        return a;
+
+    for (int i = maxHeight; i >= 0; i--)
+        if (LCA[a][i] != -1 && (LCA[a][i] != LCA[b][i]))
+        {
+            a = LCA[a][i], b = LCA[b][i];
+        }
+
+    return LCA[a][0];
+}
+
+int getDist(int a, int b)
+{
+    int lca = getLCA(a, b);
+    return level[a] + level[b] - 2 * level[lca];
+}
 
 void solve()
 {
     int n;
-    cin >> n;
-    vector<int> tree[n + 1];
+    scanf("%d", &n);
+    // MAX = n + 2; // look into it
+    // logg = (int)ceil(log2(n));//applicable for binary tree only
+    // vector<int> tree[n + 1];
+    maxHeight = n + 1;
+
+    for (int i = 0; i <= n + 1; i++)
+    {
+        tree[i].clear();
+        level[i] = 0;
+        for (int j = 0; j <= maxHeight; j++)
+            LCA[i][j] = -1;
+    }
 
     for (int i = 1; i <= n - 1; i++)
     {
         int x, y;
-        cin >> x >> y;
-        addEdge(tree, x, y);
+        scanf("%d%d", &x, &y);
+        tree[x].push_back(y), tree[y].push_back(x);
     }
     int coins[n + 1];
-
     for (int i = 1; i <= n; i++)
     {
-        cin >> coins[i];
+        scanf("%d", &coins[i]);
     }
+    init(n);
+
     ll answer = 0;
+    // int q;
+    // scanf("%d",&q);
     for (int r = 1; r <= n; r++)
     {
-        if (BFS(tree, r, n, coins) == 0)
+        vector<int> gg;
+        for (int i = 1; i <= n; i++)
         {
-            answer += (((ll)1) << r);
+            if (i != r && coins[i] % 2 == 1)
+            {
+                gg.push_back(getDist(r, i));
+                // cout << "Distance btw " << r << " and " << i << " is " << findDistance(r, i, level, commonParent, dist) << endl;
+            }
+        }
+        if (calculateNimSum(gg) == 0)
+        {
+            answer += (((ll)(1)) << r);
             answer %= mod;
         }
-
-        // cout << endl;
-        // cout << endl;
     }
 
-    cout << answer << "\n";
+    // cout << answer << "\n";
+    printf("%lld\n", answer);
+    answer = 0;
 }
 
 int main()
 {
-    // clock_t time_req;
-    // time_req = clock();
+
     FIO;
 
     int t;
-    cin >> t;
+    scanf("%d", &t);
     while (t--)
     {
         solve();
     }
-
-    // time_req = clock() - time_req;
-    // cout << "\nProcessor time " << (float)time_req / CLOCKS_PER_SEC<< " sec" << endl;
     return 0;
 }

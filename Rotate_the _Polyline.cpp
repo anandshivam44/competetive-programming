@@ -26,10 +26,28 @@ void solve()
 {
     int n;
     cin >> n;
+    double disVecX[n], disVecY[n];
+    double arrX[n],arrY[n];
+    double d;
+    double sumX=0,sumY=0;
 
     for (int i = 0; i < n; i++)
     {
+        cin >> disVecX[i] >> disVecY[i];
+        // d = sqrt(disVecX[i] * disVecX[i] + disVecY[i] * disVecY[i]);
+        // disVecX[i] /= d;
+        // disVecY[i] /= d;
+        // sumX+=disVecX[i];
+        // sumY+=disVecY[i];
     }
+    for (int i = 0; i < n-1; i++)
+    {
+        arrX[i]=disVecX[i+1]-disVecX[i];
+        arrY[i]=disVecY[i+1]-disVecY[i];
+    }
+    arrX[n-1]=disVecX[n-1]-disVecX[0];
+    arrY[n-1]=disVecY[n-1]-disVecY[0];
+    
 
     //cout <<a<<"\n";
 }
@@ -40,7 +58,7 @@ int main()
     // time_req = clock();
     FIO;
 
-    int t = 1;
+    int t;
     cin >> t;
     while (t--)
     {
