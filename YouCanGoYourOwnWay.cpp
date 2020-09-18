@@ -26,12 +26,29 @@ void test_case()
 {
     int n;
     cin >> n;
-
-    for (int i = 0; i < n; i++)
+    string s;
+    cin >> s;
+    int l = s.length();
+    string ans = "";
+    if (true) //s[0] == s[l]
     {
+        for (int i = 0; i < l; i++)
+        {
+            if (s[i] == 'E')
+            {
+                ans += 'S';
+            }
+            else
+            {
+                ans += 'E';
+            }
+        }
     }
-
-    //cout <<a<<"\n";
+    else
+    {
+        /* code */
+    }
+    cout << ans << endl;
 }
 
 int main()
@@ -42,8 +59,13 @@ int main()
 
     int t = 1;
     cin >> t;
-    while (t--)
+    // while (t--)
+    // {
+    //     solve();
+    // }
+    for (int i = 1; i <= t; i++)
     {
+        cout << "Case #" << i << ": ";
         test_case();
     }
 

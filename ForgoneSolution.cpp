@@ -22,14 +22,48 @@ const ll inf = 1e18;
 #define fill_my(arr, q) fill(all(arr), q)
 #define delete_by_value(vec, val) vec.erase(std::remove(vec.begin(), vec.end(), val), vec.end());
 
-void test_case()
+void solve()
 {
-    int n;
-    cin >> n;
+    string s;
+    // int n;
+    // cin >> n;
+    cin >> s;
+    // getline(cin, s);
+    // cout << "s = " << s << endl;
+    // s = to_string(n);
+    int l = s.length();
+    string b = "";
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < l; i++)
     {
+        char c = s[i];
+        if (c == '4')
+        {
+            s[i] = '2';
+            b += '2';
+        }
+        else
+        {
+            b += '0';
+        }
     }
+    cout << s << " ";
+    bool flag = false;
+    for (int i = 0; i < b.length(); i++)
+    {
+        char c = b[i];
+        if (c != '0')
+        {
+            flag = 1;
+        }
+        if (flag)
+        {
+            cout << b[i];
+        }
+    }
+    cout << "\n";
+
+    // cout << stoi(s) << " " << stoi(b) << endl;
 
     //cout <<a<<"\n";
 }
@@ -42,9 +76,14 @@ int main()
 
     int t = 1;
     cin >> t;
-    while (t--)
+    // while (t--)
+    // {
+    //     solve();
+    // }
+    for (int i = 1; i <= t; i++)
     {
-        test_case();
+        cout << "Case #" << i << ": ";
+        solve();
     }
 
     // time_req = clock() - time_req;
