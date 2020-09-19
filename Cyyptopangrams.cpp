@@ -44,7 +44,7 @@ int main()
     cin >> t;
     for (int i = 1; i <= t; i++)
     {
-        // cout << "Case #" << i << ": ";
+        cout << "Case #" << i << ": ";
         test_case();
     }
 

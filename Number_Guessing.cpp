@@ -22,14 +22,39 @@ const ll inf = 1e18;
 #define fill_my(arr, q) fill(all(arr), q)
 #define delete_by_value(vec, val) vec.erase(std::remove(vec.begin(), vec.end(), val), vec.end());
 
-void test_case()
+bool test_case()
 {
+
+    int low, mid, high;
+    cin >> low >> high;
     int n;
     cin >> n;
 
-    for (int i = 0; i < n; i++)
+    while (low <= high)
     {
+        mid = (low + high) / 2;
+        cout << mid << endl;
+        fflush(stdout);
+        string s;
+        cin >> s;
+        if (s == "CORRECT")
+        {
+            break;
+        }
+        else if (s == "TOO_SMALL")
+        {
+            low = mid + 1;
+        }
+        else if (s == "TOO_BIG")
+        {
+            high = mid - 1;
+        }
+        else if (s == "WRONG_ANSWER")
+        {
+            return true;
+        }
     }
+    return false;
 
     //cout <<a<<"\n";
 }
@@ -45,7 +70,10 @@ int main()
     for (int i = 1; i <= t; i++)
     {
         // cout << "Case #" << i << ": ";
-        test_case();
+        if (test_case())
+        {
+            return 0;
+        }
     }
 
     // time_req = clock() - time_req;
