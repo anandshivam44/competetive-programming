@@ -19,7 +19,7 @@
 #   4. my_solution.exe
 # Then you could run the judge and solution together, using this, as:
 #   1. python interactive_runner.py python3 testing_tool.py 0 -- python3 my_solution.py
-#   2. python interactive_runner.py python3 testing_tool.py 0 -- ./my_solution
+#   2. python interactive_runner.py python3 testing_tool.py 0 -- ./solution              g++ Bae.cpp -std=c++14 -pthread -O3 -o solution
 #   3. python interactive_runner.py python3 testing_tool.py 0 -- java solution
 #   4. python interactive_runner.py python3 testing_tool.py 0 -- my_solution.exe
 # Notice that the solution in cases 2, 3 and 4 would usually have a
@@ -51,10 +51,6 @@ class SubprocessThread(threading.Thread):
     self.stderr_prefix = stderr_prefix
     self.p = subprocess.Popen(
         args, stdin=stdin_pipe, stdout=stdout_pipe, stderr=subprocess.PIPE)
-    print(stdin_pipe)
-    print(stdout_pipe)
-    print(self)
-    print(args)
 
   def run(self):
     try:
@@ -71,23 +67,17 @@ class SubprocessThread(threading.Thread):
   # found in the stream.
   def pipeToStdErr(self, stream):
     new_line = True
-    print(self)
-    print(stream)
     while True:
       chunk = stream.readline(1024)
-      print(chunk)
       if not chunk:
         return
       chunk = chunk.decode("UTF-8")
-      print(chunk)
       if new_line and self.stderr_prefix:
         chunk = self.stderr_prefix + chunk
-        print(chunk)
         new_line = False
       sys.stderr.write(chunk)
       if chunk.endswith("\n"):
         new_line = True
-        print(chunk)
       sys.stderr.flush()
 
 
@@ -103,8 +93,6 @@ t_judge = SubprocessThread(
     stdin_pipe=t_sol.p.stdout,
     stdout_pipe=t_sol.p.stdin,
     stderr_prefix="judge: ")
-# print(stdin_pipe)
-# print(stdout_pipe)
 t_sol.start()
 t_judge.start()
 t_sol.join()
