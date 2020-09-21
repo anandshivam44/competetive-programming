@@ -78,5 +78,6 @@
         "typeinfo": "cpp",
         "valarray": "cpp"
     },
-    "files.autoSave": "afterDelay"
+    "files.autoSave": "afterDelay",
+    "python.linting.pylintEnabled": true
 }

@@ -1,112 +1,57 @@
-#include <iostream>
-#include <vector>
-#include <queue>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main() {
-	int m;		// number of rows
-	int n;		// number of columns
-	int r;		// number of rotations total
-	int q;		// number of rotations for layer
-	int startm, startn;		// starting position
+	ios_base::sync_with_stdio(0);
+	int T; cin >> T;
 
-	cin >> m >> n >> r;
-
-	vector< vector<int> > input(m, vector<int>(n));
-
-	// Fill the input matrix
-	for(int i=0; i<m; ++i) {
-		for(int j=0; j<n; ++j) {
-			cin >> input[i][j];
+	string S[5];
+	for (int i = 0; i < 1024; i++) {
+		for (int z = 0; z < 5; z++) {
+			S[z] += char('0' + ((i >> z) & 1));
 		}
 	}
 
-	// Calculate the answer
-	int t = ((m < n)?m:n)/2;
-	for(int x=0; x<t; ++x) {
-		queue<int> numbers;
+	for (int case_num = 1; case_num <= T; case_num ++) {
+		int N, B, F; cin >> N >> B >> F;
+		assert(B <= 15);
 
-		// add top layer
-		for(int i=x; i<n-x; ++i) {
-			numbers.push(input[x][i]);
+		string Q[5];
+		for (int q = 0; q < 5; q++) {
+			cout << S[q].substr(0, N) << endl << flush;
+			cin >> Q[q];
+			if (Q[q] == "-1") exit(0);
+			assert(int(Q[q].size()) == N - B);
+			Q[q] += S[q].substr(N);
+			assert(int(Q[q].size()) == 1024 - B);
 		}
-		// add right layer
-		if(m-x-x > 2) {
-			for(int i=x+1; i<m-x-1; ++i) {
-				numbers.push(input[i][n-x-1]);
+
+		vector<int> bads;
+		int nxt = 0;
+		for (int i = 0; i < 1024 - B; i++) {
+			int v = 0;
+			for (int q = 0; q < 5; q++) {
+				v |= int(Q[q][i] - '0') << q;
 			}
-		}
-		// add bot layer
-		for(int i=n-x-1; i>=x; --i) {
-			numbers.push(input[m-x-1][i]);
-		}
-		// add left layer
-		if(m-x-x > 2) {
-			for(int i=m-x-1-1; i>x; --i) {
-				numbers.push(input[i][x]);
+			while ((nxt & 31) != v) {
+				bads.push_back(nxt);
+				nxt++;
 			}
+			nxt++;
 		}
 
-		// find the start position
-		int mm = m - x - x;
-		int nn = n - x - x;
-		q = (mm*nn)-((mm-2)*(nn-2));
-		q = r % q;
-		if(q == 0) {
-			startm = x;
-			startn = x;
-		} else if(q < mm) {
-			startm = q + x;
-			startn = x;
-		} else if(q < mm+nn-1) {
-			startm = mm - 1 + x;
-			startn = q - nn + x;
-		} else if(q < mm+nn+nn-2) {
-			startm = abs(q - nn - mm - 1 + x);
-			startn = nn - 1 + x;
-		} else {
-			startm = x;
-			startn = abs(q - nn - mm - nn + x);
+		while (nxt != 1024) {
+			bads.push_back(nxt);
+			nxt++;
 		}
 
-		// re-order the queue
-		while(q--) {
-			numbers.push(numbers.front());
-			numbers.pop();
+		assert(int(bads.size()) == B);
+		for (int i = 0; i < B; i++) {
+			cout << bads[i] << " \n"[i+1==B];
 		}
-
-		// add top layer
-		for(int i=x; i<n-x; ++i) {
-			input[x][i] = numbers.front();
-			numbers.pop();
-		}
-		// add right layer
-		if(m-x-x > 2) {
-			for(int i=x+1; i<m-x-1; ++i) {
-				input[i][n-x-1] = numbers.front();
-				numbers.pop();
-			}
-		}
-		// add bot layer
-		for(int i=n-x-1; i>=x; --i) {
-			input[m-x-1][i] = numbers.front();
-			numbers.pop();
-		}
-		// add left layer
-		if(m-x-x > 2) {
-			for(int i=m-x-1-1; i>x; --i) {
-				input[i][x] = numbers.front();
-				numbers.pop();
-			}
-		}
-	}
-
-	// Output the answer
-	for(int i=0; i<m; ++i) {
-		for(int j=0; j<n; ++j) {
-			cout << input[i][j] << " ";
-		}
-		cout << endl;
+		cout << flush;
+		int verdict; cin >> verdict;
+		if (verdict != 1) exit(0);
 	}
 
 	return 0;
