@@ -4,5 +4,5 @@ using namespace std;
 int main()
 {
     string matrix[]={"abcde","fghij","klmno"};
-    string
+    return 0;
 }

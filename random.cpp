@@ -24,22 +24,10 @@ const ll inf = 1e18;
 
 void removeDuplicates(int arr[], int n)
 {
-
-    // Initialise a vector
-    // to store the array values
-    // and an iterator
-    // to traverse this vector
     vector<int> v(arr, arr + n);
     vector<int>::iterator it;
-
-    // using unique() method to remove duplicates
     it = unique(v.begin(), v.end());
-
-    // resize the new vector
     v.resize(distance(v.begin(), it));
-
-    // Print the array with duplicates removed
-    // cout << "\nAfter removing duplicates:\n";
     for (it = v.begin(); it != v.end(); ++it)
         cout << *it << " ";
     // cout << '\n';
@@ -48,8 +36,8 @@ void removeDuplicates(int arr[], int n)
 void solve()
 {
 
-    int n = rand() % 100 + 3;
-    int r = rand() % 100 + 2;
+    int n = rand() % 10000 + 3;
+    int r = rand() % 10000 + 2;
     cout << n << " " << r << endl;
     int arr[n];
     // vector<int> arr;
@@ -61,13 +49,22 @@ void solve()
     }
     // sort(arr.begin(), arr.end());
     sort(arr, arr + n);
-    removeDuplicates(arr, n);
+    // removeDuplicates(arr, n);
     // print_vector(arr);
-
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cout << arr[i] << " ";
-    // }
+    int a = arr[0];
+    cout << arr[0] << " ";
+    for (int i = 1; i < n; i++)
+    {
+        int p = arr[i];
+        if (a == p)
+        {
+        }
+        else
+        {
+            cout << arr[i] << " ";
+            a = arr[i];
+        }
+    }
     cout << endl;
 }
 
@@ -80,7 +77,7 @@ int main()
     // srand(time(0));
     // cout << "Hi" << endl;
     srand(time(NULL));
-    int t = rand() % 100 + 1;
+    int t = rand() % 10 + 1;
     cout << t << endl;
     while (t--)
     {
