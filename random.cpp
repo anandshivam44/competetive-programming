@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <random>
 using namespace std;
 typedef long long ll;
 ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
@@ -21,63 +22,62 @@ const ll inf = 1e18;
     cout << "\n"
 #define fill_my(arr, q) fill(all(arr), q)
 #define delete_by_value(vec, val) vec.erase(std::remove(vec.begin(), vec.end(), val), vec.end());
-
-void removeDuplicates(int arr[], int n)
-{
-    vector<int> v(arr, arr + n);
-    vector<int>::iterator it;
-    it = unique(v.begin(), v.end());
-    v.resize(distance(v.begin(), it));
-    for (it = v.begin(); it != v.end(); ++it)
-        cout << *it << " ";
-    // cout << '\n';
-}
+std::random_device rd;
+std::default_random_engine generator(rd()); // rd() provides a random seed
+// void removeDuplicates(int arr[], int n)
+// {
+//     vector<int> v(arr, arr + n);
+//     vector<int>::iterator it;
+//     it = unique(v.begin(), v.end());
+//     v.resize(distance(v.begin(), it));
+//     for (it = v.begin(); it != v.end(); ++it)
+//         cout << *it << " ";
+//     // cout << '\n';
+// }
 
 void solve()
 {
 
-    int n = rand() % 10000 + 3;
-    int r = rand() % 10000 + 2;
-    cout << n << " " << r << endl;
+    int n = rand() % 100 + 3;
+    int r = rand() % 10+ 2;
     int arr[n];
-    // vector<int> arr;
 
     for (int i = 0; i < n; i++)
     {
-        // arr.push_back(rand() % 360);
+        // std::uniform_real_distribution<double> distribution(0.1, 359.9);
+        // double number = distribution(generator);
         arr[i] = rand() % 360;
     }
-    // sort(arr.begin(), arr.end());
     sort(arr, arr + n);
-    // removeDuplicates(arr, n);
-    // print_vector(arr);
+    int count = 1;
     int a = arr[0];
-    cout << arr[0] << " ";
+    vector<int> v;
+    v.push_back(arr[0]);
+
     for (int i = 1; i < n; i++)
     {
         int p = arr[i];
-        if (a == p)
+        if (a != p)
         {
-        }
-        else
-        {
-            cout << arr[i] << " ";
+            v.push_back(arr[i]);
+            count++;
             a = arr[i];
         }
     }
+    cout << count << " " << r << endl;
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " ";
+    }
+
     cout << endl;
 }
 
 int main()
 {
-    // clock_t time_req;
-    // time_req = clock();
-    // cin.sync_with_stdio(false);
-    // cin.tie(0);
-    // srand(time(0));
-    // cout << "Hi" << endl;
     srand(time(NULL));
-    int t = rand() % 10 + 1;
+    int t = rand() % 10000 + 1;
+    // cout << "t = " << t << endl;
     cout << t << endl;
     while (t--)
     {
