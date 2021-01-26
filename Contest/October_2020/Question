@@ -1,0 +1,71 @@
+ADVENTURES OF RICK-1
+__________________
+
+Rick,the mad scientist, took Chef in a parallel universe where a cube is more stable shape than a Sphere. Even the Planets are cuboidal in shape. Every planet is made up of layers of rocks. Now, It is time to label the layers and print them. The outermost layer is marked as N and every consecutive layer is marked one less than the previous layer untill it finally reaches core of the planet which is marked as 1. 
+
+### Input
+A single integer N containing the number of layers of rock in the planet.
+
+### Output
+Print a 2D square matrix with outermost rectangle as N and and next outermost rectangle as N-1 and so on. 
+
+### Constraints
+1<=N<=10^3
+
+### Example Input 1
+4
+### Example Output 1
+4 4 4 4 4 4 4 
+4 3 3 3 3 3 4 
+4 3 2 2 2 3 4 
+4 3 2 1 2 3 4 
+4 3 2 2 2 3 4 
+4 3 3 3 3 3 4 
+4 4 4 4 4 4 4 
+
+
+### Example Input 2
+10
+### Wrong Output 
+10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 
+10 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 10 
+10 9 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 9 10 
+10 9 8 7 7 7 7 7 7 7 7 7 7 7 7 7 8 9 10 
+10 9 8 7 6 6 6 6 6 6 6 6 6 6 6 7 8 9 10 
+10 9 8 7 6 5 5 5 5 5 5 5 5 5 6 7 8 9 10 
+10 9 8 7 6 5 4 4 4 4 4 4 4 5 6 7 8 9 10 
+10 9 8 7 6 5 4 3 3 3 3 3 4 5 6 7 8 9 10 
+10 9 8 7 6 5 4 3 2 2 2 3 4 5 6 7 8 9 10 
+10 9 8 7 6 5 4 3 2 1 2 3 4 5 6 7 8 9 10 
+10 9 8 7 6 5 4 3 2 2 2 3 4 5 6 7 8 9 10 
+10 9 8 7 6 5 4 3 3 3 3 3 4 5 6 7 8 9 10 
+10 9 8 7 6 5 4 4 4 4 4 4 4 5 6 7 8 9 10 
+10 9 8 7 6 5 5 5 5 5 5 5 5 5 6 7 8 9 10 
+10 9 8 7 6 6 6 6 6 6 6 6 6 6 6 7 8 9 10 
+10 9 8 7 7 7 7 7 7 7 7 7 7 7 7 7 8 9 10 
+10 9 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 9 10 
+10 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 10 
+10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 
+
+### Correct Output 2
+10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 
+10  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9 10 
+10  9  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  9 10 
+10  9  8  7  7  7  7  7  7  7  7  7  7  7  7  7  8  9 10 
+10  9  8  7  6  6  6  6  6  6  6  6  6  6  6  7  8  9 10 
+10  9  8  7  6  5  5  5  5  5  5  5  5  5  6  7  8  9 10 
+10  9  8  7  6  5  4  4  4  4  4  4  4  5  6  7  8  9 10 
+10  9  8  7  6  5  4  3  3  3  3  3  4  5  6  7  8  9 10 
+10  9  8  7  6  5  4  3  2  2  2  3  4  5  6  7  8  9 10 
+10  9  8  7  6  5  4  3  2  1  2  3  4  5  6  7  8  9 10 
+10  9  8  7  6  5  4  3  2  2  2  3  4  5  6  7  8  9 10 
+10  9  8  7  6  5  4  3  3  3  3  3  4  5  6  7  8  9 10 
+10  9  8  7  6  5  4  4  4  4  4  4  4  5  6  7  8  9 10 
+10  9  8  7  6  5  5  5  5  5  5  5  5  5  6  7  8  9 10 
+10  9  8  7  6  6  6  6  6  6  6  6  6  6  6  7  8  9 10 
+10  9  8  7  7  7  7  7  7  7  7  7  7  7  7  7  8  9 10 
+10  9  8  8  8  8  8  8  8  8  8  8  8  8  8  8  8  9 10 
+10  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9  9 10 
+10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 
+
+
