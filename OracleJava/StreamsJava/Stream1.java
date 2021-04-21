@@ -13,8 +13,15 @@ public class Stream1 {
       arr.add(Integer.valueOf(2));
       arr.add(Integer.valueOf(1));
 
-      arr.stream().parallel().filter(p -> (p > 10)).forEach((p) -> arr.remove(p)) );
+      System.out.println("Single Thread Stream");
+      arr.stream().map(p -> p * p).forEach(y -> System.out.println(y));
+      System.out.println();
 
+      System.out.println("Parallel Stream");
+      arr.stream().parallel().map(p -> p * p).forEach(y -> System.out.println(y));
+      System.out.println();
+
+      System.out.println("Iterator");
       Iterator itr = arr.iterator();
       while (itr.hasNext()) {
          System.out.println(itr.next());
