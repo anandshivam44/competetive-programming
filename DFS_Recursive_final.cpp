@@ -29,7 +29,6 @@ int main()
     nodes = 15; //Number of nodes
     edges = 13; //Number of edges
     vector<int> adj[nodes + 1];
-    
 
     addEdge(adj, 1, 2);
     addEdge(adj, 1, 3);
