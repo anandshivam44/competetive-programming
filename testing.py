@@ -1,20 +1,8 @@
-import urllib.request
-import cv2
-import numpy as np
-import time
-cap = cv2.VideoCapture(0)
-if (cap.isOpened() == False):
-    print("Error opening video stream or file")
-else:
-    print('File Loaded')
+n = 3
 
-while(cap.isOpened()):
-    ret, frame = cap.read()
-    if ret == True:
-        cv2.imshow('Frame', frame)
-    if cv2.waitKey(25) & 0xFF == ord('q'):
-        break
-    else:
-        break
-cap.release()
-cv2.destroyAllWindows()
+for i in range(0, n):
+    print("  o  **")
+    print(" /|\ *")
+    print(" / \ *")
+    for j in range(1):
+        print("*"*n*n)
